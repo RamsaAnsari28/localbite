@@ -86,3 +86,121 @@ LocalBite/
 ├── public/
 ├── package.json
 └── README.md
+🚀 Getting Started
+1. Clone the repository
+git clone https://github.com/RamsaAnsari28/localbite.git
+cd localbite
+
+Replace YOUR-USERNAME with your GitHub username.
+
+2. Install frontend dependencies
+npm install
+3. Install backend dependencies
+cd server
+npm install
+4. Environment Variables
+
+Create a .env file inside the server folder.
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_jwt_secret
+PORT=5000
+
+Create the frontend .env file if required by the API configuration.
+
+Never commit your .env files or expose your database credentials.
+
+▶️ Running the Application
+Start the Backend
+
+From the server directory:
+
+npm run dev
+
+The backend will run on:
+
+http://localhost:5000
+Start the Frontend
+
+From the project root:
+
+npm run dev
+
+The frontend will run on the Vite development server.
+
+🔑 Authentication
+
+LocalBite includes user authentication using:
+
+User registration
+Login
+JWT authentication
+Protected routes
+Logout
+Persistent login state
+Password visibility controls
+📍 Location & Discovery
+
+LocalBite uses the browser's Geolocation API to determine the user's location.
+
+The application calculates the distance between the user and vendors and allows filtering by:
+
+Within 1 km
+Within 3 km
+Within 5 km
+Within 10 km
+
+Users can also sort vendors by:
+
+Recommended
+Highest rated
+Nearest
+❤️ Favorites
+
+Users can save vendors to their favorites and access them from the Favorites page.
+
+Favorites are persisted locally using browser localStorage, allowing them to remain available after refreshing the application.
+
+🏪 Vendor Details
+
+Each vendor has a dedicated details page displaying:
+
+Vendor name
+Cuisine
+Rating
+Price range
+Open/closed status
+Delivery availability
+Vendor image
+📸 Screenshots
+
+Screenshots will be added after the final deployment.
+
+🚀 Live Demo
+
+Coming soon.
+
+🔮 Future Improvements
+🗺️ Interactive map integration
+🛒 Food ordering
+💳 Online payments
+⭐ User reviews and ratings
+🔔 Notifications
+🏪 Vendor dashboard
+📦 Order tracking
+☁️ Production deployment
+👩‍💻 Author
+
+## 👩‍💻 Author
+
+**Ramsha Ansari**
+
+MCA Graduate | Web Developer
+
+Interested in building modern and user-friendly web applications using React, TypeScript, Node.js, and MongoDB.
+
+---
+
+## 📄 License
+
+This project is created for learning and portfolio purposes.
