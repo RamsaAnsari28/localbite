@@ -1,0 +1,36 @@
+@import "tailwindcss";
+html {
+  scroll-behavior: smooth;
+}
+@keyframes favorite-pop {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.35);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.favorite-pop {
+  animation: favorite-pop 0.3s ease-in-out;
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
