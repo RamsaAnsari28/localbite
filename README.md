@@ -1,75 +1,88 @@
-# React + TypeScript + Vite
+# 🍜 LocalBite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> Discover amazing local food spots hiding around you.
 
-Currently, two official plugins are available:
+LocalBite is a full-stack food discovery web application that helps users discover street food vendors, local stalls, home kitchens, and hidden food spots nearby.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Users can search for vendors, explore cuisines, find nearby places using their location, save favorites, and view detailed vendor information.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ✨ Features
 
-## Expanding the ESLint configuration
+- 🔐 User registration and login
+- 👋 Persistent user authentication
+- 🔎 Search for food and vendors
+- 🍴 Browse vendors by cuisine/category
+- 📍 Use current location to find nearby vendors
+- 📏 Filter vendors by distance
+- ⭐ Sort vendors by rating
+- 📍 Sort vendors by nearest distance
+- ❤️ Add and remove favorite vendors
+- 🏪 View detailed vendor information
+- 🟢 Open/closed vendor status
+- 🛵 Delivery availability
+- 📱 Responsive design
+- ⏳ Loading and error states
+- ✨ Interactive UI animations
+- 👁️ Password visibility toggle
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tech Stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Frontend
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- React
+- TypeScript
+- Tailwind CSS
+- React Router
+- Vite
 
-```
+### Backend
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- Node.js
+- Express.js
+- TypeScript
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Database
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- MongoDB
+- MongoDB Atlas
 
-```
+### Tools
+
+- Git
+- GitHub
+- Postman
+- VS Code
+
+---
+
+## 🏗️ Project Structure
+
+```text
+LocalBite/
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── context/
+│   ├── config/
+│   ├── data/
+│   ├── types/
+│   └── utils/
+│
+├── server/
+│   └── src/
+│       ├── config/
+│       ├── middleware/
+│       ├── models/
+│       ├── routes/
+│       ├── types/
+│       ├── index.ts
+│       └── seed.ts
+│
+├── public/
+├── package.json
+└── README.md
