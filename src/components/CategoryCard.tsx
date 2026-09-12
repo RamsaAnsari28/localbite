@@ -12,9 +12,9 @@ function CategoryCard({
   return (
     <button
       onClick={onClick}
-      className="group flex min-w-32 flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 hover:-translate-y-1 hover:border-orange-300 hover:shadow-lg"
+      className="group flex min-w-32 flex-col items-center gap-3 rounded-2xl border border-gray-200 bg-white p-5 transition-all duration-300 active:scale-95 active:border-orange-300 active:bg-orange-50 active:shadow-md hover:-translate-y-1 hover:border-orange-300 hover:shadow-lg"
     >
-      <span className="text-4xl transition-transform duration-300 group-hover:scale-110">
+      <span className="text-4xl transition-transform duration-300 group-active:scale-110 group-hover:scale-110">
         {emoji}
       </span>
 
