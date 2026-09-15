@@ -4,6 +4,8 @@ import cors from "cors";
 import vendorRoutes from "./routes/vendorRoutes.js";
 import { connectDB } from "./config/db.js";
 import authRoutes from "./routes/authRoutes.js";
+import foodRoutes from "./routes/foodRoutes.js";
+import orderRoutes from "./routes/orderRoutes.js";
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.get("/", (_req, res) => {
 
 app.use("/api/vendors", vendorRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/food", foodRoutes);
 
 connectDB();
 

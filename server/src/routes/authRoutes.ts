@@ -33,6 +33,7 @@ router.post("/register", async (req, res) => {
       name,
       email,
       password: hashedPassword,
+      role: "customer",
     });
 
     res.status(201).json({
@@ -41,6 +42,7 @@ router.post("/register", async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -99,6 +101,7 @@ router.post("/login", async (req, res) => {
         id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {
@@ -110,6 +113,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// Get current user
 router.get("/me", protect, async (req, res) => {
   try {
     const user = await User.findById(req.userId).select("-password");
@@ -120,7 +124,12 @@ router.get("/me", protect, async (req, res) => {
       });
     }
 
-    res.json(user);
+    res.json({
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      role: user.role,
+    });
   } catch (error) {
     console.error("Error fetching user:", error);
 

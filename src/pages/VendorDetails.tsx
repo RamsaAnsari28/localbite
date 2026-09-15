@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import type { Vendor } from "../types/vendor";
+import type { FoodItem } from "../types/food";
 import { API_BASE_URL } from "../config/api";
+import { useCart } from "../context/CartContext";
 
 function VendorDetails() {
   const { id } = useParams();
+  const { cartItems, addToCart } = useCart();
   const [vendor, setVendor] = useState<Vendor | null>(null);
+  const [foodItems, setFoodItems] = useState<FoodItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,15 +36,46 @@ function VendorDetails() {
       }
     };
 
-    if (id) {
+        const fetchFoodItems = async () => {
+      try {
+        const response = await fetch(
+          `${API_BASE_URL}/api/food/vendor/${id}`
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch food items");
+        }
+
+        const data = await response.json();
+
+        setFoodItems(
+          data.map((item: any) => ({
+            ...item,
+            id: item._id,
+          }))
+        );
+        
+      } catch (error) {
+        console.error("Error fetching food items:", error);
+      }
+    };
+       if (id) {
       fetchVendor();
+      fetchFoodItems();
     }
   }, [id]);
 
   if (loading) {
+    const cartCount = cartItems.reduce(
+  (total, item) => total + item.quantity,
+  0
+);
     return (
       <main className="min-h-screen px-6 py-12">
         <div className="mx-auto max-w-5xl text-center">
+          <div className="mb-4 rounded-xl bg-orange-100 px-4 py-3 font-semibold text-orange-700">
+  Cart items: {cartCount}
+</div>
           Loading vendor... 🍽️
         </div>
       </main>
@@ -198,7 +233,74 @@ function VendorDetails() {
               </p>
 
             </div>
+                        {/* Menu */}
+            <div className="mt-10 border-t border-gray-100 pt-8">
+              <h2 className="text-2xl font-bold text-gray-900">
+                Menu
+              </h2>
 
+              <p className="mt-2 text-gray-500">
+                Explore what’s available at {vendor.name}.
+              </p>
+
+              <div className="mt-6 grid gap-5 sm:grid-cols-2">
+                {foodItems.map((item) => (
+                  <div
+                    key={item.id}
+                    className="overflow-hidden rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+                  >
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-48 w-full object-cover"
+                    />
+
+                    <div className="p-5">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900">
+                            {item.name}
+                          </h3>
+
+                          <p className="mt-2 text-sm leading-6 text-gray-500">
+                            {item.description}
+                          </p>
+                        </div>
+
+                        <span
+                          className={`mt-1 h-3 w-3 shrink-0 rounded-full ${
+                            item.isVeg
+                              ? "bg-green-500"
+                              : "bg-red-500"
+                          }`}
+                          title={item.isVeg ? "Vegetarian" : "Non-vegetarian"}
+                        />
+                      </div>
+
+                      <div className="mt-5 flex items-center justify-between gap-3">
+  <span className="text-lg font-bold text-orange-500">
+    ₹{item.price}
+  </span>
+
+  {item.isAvailable ? (
+    <button
+      type="button"
+      onClick={() => addToCart(item)}
+      className="rounded-full bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition-all duration-300 hover:bg-orange-600 hover:shadow-md active:scale-95"
+    >
+      Add to Cart
+    </button>
+  ) : (
+    <span className="text-sm font-medium text-red-500">
+      Currently unavailable
+    </span>
+  )}
+</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
 
