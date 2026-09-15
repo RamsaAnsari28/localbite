@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { API_BASE_URL } from "../config/api";
+import { useAuth } from "../context/AuthContext";
 
 interface OrderItem {
   foodId: string;
@@ -39,6 +40,8 @@ const statuses = [
 ] as const;
 
 function AdminOrders() {
+  const { user } = useAuth();
+
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(
@@ -50,15 +53,24 @@ function AdminOrders() {
     try {
       setError("");
 
+      const token = localStorage.getItem("localbite-token");
+
       const response = await fetch(
-        `${API_BASE_URL}/api/orders`
+        `${API_BASE_URL}/api/orders`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch orders.");
-      }
-
       const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to fetch orders."
+        );
+      }
 
       setOrders(data);
     } catch (error) {
@@ -75,8 +87,10 @@ function AdminOrders() {
   };
 
   useEffect(() => {
-    fetchOrders();
-  }, []);
+    if (user?.role === "admin") {
+      fetchOrders();
+    }
+  }, [user]);
 
   const updateStatus = async (
     orderId: string,
@@ -86,12 +100,15 @@ function AdminOrders() {
       setUpdatingOrderId(orderId);
       setError("");
 
+      const token = localStorage.getItem("localbite-token");
+
       const response = await fetch(
         `${API_BASE_URL}/api/orders/${orderId}/status`,
         {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({
             status,
@@ -130,7 +147,6 @@ function AdminOrders() {
   return (
     <main className="min-h-screen bg-orange-50/30 px-4 py-8 sm:px-6 sm:py-12">
       <div className="mx-auto max-w-6xl">
-
         <Link
           to="/"
           className="font-semibold text-orange-500 transition-colors hover:text-orange-600"
@@ -190,7 +206,6 @@ function AdminOrders() {
                 className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm"
               >
                 <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wide text-gray-400">
                       Order ID
@@ -241,7 +256,6 @@ function AdminOrders() {
                 </div>
 
                 <div className="mt-6 grid gap-5 border-t border-gray-100 pt-6 lg:grid-cols-[1fr_280px]">
-
                   <div>
                     <h2 className="font-bold text-gray-900">
                       Customer
@@ -305,7 +319,6 @@ function AdminOrders() {
                       </p>
                     </div>
                   </div>
-
                 </div>
               </div>
             ))}
