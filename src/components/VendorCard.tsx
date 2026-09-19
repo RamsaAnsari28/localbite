@@ -112,8 +112,12 @@ setTimeout(() => {
             </h3>
 
             <p className="mt-1 text-sm text-gray-500">
-              {vendor.cuisine}
-            </p>
+  {vendor.cuisine}
+</p>
+
+<p className="mt-1 text-xs font-medium text-orange-500">
+  {vendor.vendorType}
+</p>
           </div>
 
           {/* Rating */}

@@ -17,6 +17,12 @@ const vendorSchema = new Schema(
       required: true,
     },
 
+    vendorType: {
+      type: String,
+      required: true,
+      enum: ["Food Truck", "Street Food", "Local Eatery", "Cloud Kitchen"],
+    },
+
     rating: {
       type: Number,
       required: true,

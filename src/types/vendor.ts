@@ -3,6 +3,7 @@ export interface Vendor {
   name: string;
   image: string;
   cuisine: string;
+  vendorType: string;
   rating: number;
   latitude: number;
   longitude: number;
